@@ -1,0 +1,5 @@
+{
+  "name": "Hackathon Management Platform",
+  "description": "A web application to streamline the organization, execution, and participation in hackathon events, with features for administrators, participants, and judges. Includes AI-powered assistance for administrators.",
+  "requestFramePermissions": []
+}
