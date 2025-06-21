@@ -1,0 +1,6 @@
+{
+  "name": "Hackathon Management Platform",
+  "description": "A comprehensive platform for organizing and managing hackathons, including participant submissions, multi-round judging, admin controls for event customization, and AI-powered assistance for best practices.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
