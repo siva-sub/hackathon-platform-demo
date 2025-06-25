@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // Determine the base path from the current URL, e.g., /RepoName/
+    // This assumes the 404.html is at the root of the GitHub Pages site,
+    // or Vite correctly places it relative to index.html.
+    // For GitHub Pages, the URL structure is typically <username>.github.io/<repo-name>/
+    // So, if the current path is /<repo-name>/some/path, we want to redirect to
+    // /<repo-name>/?p=/some/path and then have index.html strip the /<repo-name>/ part.
+
+    // Get the repository name if the site is hosted like <username>.github.io/<repo-name>/
+    // If not, basePath will be '/'
+    const repoName = window.location.pathname.match(/^\/([^\/]+)/);
+    const basePath = repoName ? repoName[0] + '/' : '/';
+
+    // The path part of the URL that we want to preserve for the SPA router
+    let spaPath = window.location.pathname.substring(basePath.length);
+    if (window.location.search) {
+      spaPath += window.location.search;
+    }
+    if (window.location.hash) {
+      spaPath += window.location.hash;
+    }
+
+    // Construct the redirect URL.
+    // We redirect to the base path (e.g., /RepoName/ or /)
+    // and pass the original path, query, and hash as a query parameter `p`.
+    // We also add a `q` parameter from original query and `h` from original hash
+    // to make it easier for index.html to reconstruct the full path.
+    // An alternative is to use sessionStorage.
+
+    const redirectUrl = basePath +
+                        '?p=/' + spaPath +
+                        '&q=' + encodeURIComponent(window.location.search) +
+                        '&h=' + encodeURIComponent(window.location.hash);
+
+    // Perform the redirect.
+    window.location.replace(redirectUrl);
+
+  </script>
+</head>
+<body>
+  If you are not redirected automatically, please <a href="/">click here</a>.
+</body>
+</html>
