@@ -1,3 +1,4 @@
+import './src/index.css'; // Import Tailwind's entry point
 import './index.css'; // Import Tailwind's entry point
 import React from 'react';
 import ReactDOM from 'react-dom/client';
