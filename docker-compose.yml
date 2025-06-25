@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Frontend Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:8080"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./gcp-service-account.json:/app/gcp-service-account.json:ro
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - hackathon-network
+    restart: unless-stopped
+
+  # PostgreSQL Database (for future backend)
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hackathon_platform
+      POSTGRES_USER: hackathon_user
+      POSTGRES_PASSWORD: hackathon_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - hackathon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hackathon_user -d hackathon_platform"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hackathon-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Development Database Admin (optional)
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+    depends_on:
+      - postgres
+    networks:
+      - hackathon-network
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  hackathon-network:
+    driver: bridge

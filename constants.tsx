@@ -47,7 +47,7 @@ export const defaultEventSchemaConfig: EventSchema = {
 };
 
 
-export const DefaultHackathonData: HackathonData = {
+export const DefaultHackathonData: Partial<HackathonData> = {
   title: "AI For Good Challenge - 3 Stage Demo",
   description: "A 3-stage hackathon event. AI can help draft an engaging description that highlights unique aspects and attracts participants. Consider asking AI to generate 3-5 theme ideas based on current tech trends, or even draft welcome email templates for participants.",
   rules: "1. Eligibility: Open to all innovators. \n2. Team Size: 1-5 members. \n3. Submission: Must address a chosen problem statement. \n4. Code of Conduct: Be respectful and collaborative. \n\nAI can help generate a comprehensive and fair rule set, including clauses on IP ownership, use of AI tools in projects, and dispute resolution, considering common hackathon pitfalls and ethical considerations. AI can also help draft communication templates for rule violations or suggest methods for secure code sharing for teams.",
@@ -118,14 +118,21 @@ export const DefaultHackathonData: HackathonData = {
 };
 
 export const DefaultHackathonData2: HackathonData = {
-  ...DefaultHackathonData, 
+  ...DefaultHackathonData,
+  timeline: "Kick-off: [Date]\nSubmission Deadline: [Date]\nWinners Announcement: [Date]",
+  visibility: 'public',
+  requiresApproval: false,
+  tags: ['web', 'innovation', 'future'],
+  difficulty: 'intermediate',
+  estimatedDuration: '2 weeks',
+  legalDocuments: [],
   title: "Future Web Innovators Hackathon",
   description: "Shape the next generation of web technologies. This event focuses on decentralized apps, advanced UI/UX, and performance optimization. AI can help tailor this description to target specific developer communities, perhaps by suggesting keywords or highlighting relevant new W3C standards. AI could also generate challenge ideas for 'WebAssembly for creative coding'. Encourage team formation for diverse skill sets.",
   rules: "1. Focus on Web 3.0, WebAssembly, Progressive Web Apps, or novel UI/UX paradigms. \n2. Open source submissions are encouraged. \n3. Teams of 1-4. \n\nAI can help draft rules specific to technology constraints or open-source licensing, or suggest fair ways to handle pre-existing code. Also consider AI for drafting team agreement templates.",
   publicPageContent: {
-    ...DefaultHackathonData.publicPageContent,
     heroTitle: "Build the Web of Tomorrow, Today!",
     heroSubtitle: "Decentralize, optimize, and create groundbreaking web experiences.",
+    aboutSection: "Shape the next generation of web technologies. This event focuses on decentralized apps, advanced UI/UX, and performance optimization.",
     imageUrl: "https://via.placeholder.com/1200x400.png?text=Future+Web+Innovators"
   },
   submissionQuestions: [
@@ -186,13 +193,20 @@ export const DefaultHackathonData2: HackathonData = {
 
 export const DefaultHackathonData3: HackathonData = {
   ...DefaultHackathonData,
+  timeline: "Kick-off: [Date]\nSubmission Deadline: [Date]\nWinners Announcement: [Date]",
+  visibility: 'public',
+  requiresApproval: false,
+  tags: ['sustainability', 'environment', 'green-tech'],
+  difficulty: 'advanced',
+  estimatedDuration: '3 weeks',
+  legalDocuments: [],
   title: "Sustainable Tech Challenge 2024",
   description: "Develop technology solutions that promote environmental sustainability and address climate change. Focus areas: renewable energy, circular economy, smart agriculture, conservation, sustainable transportation. AI can help generate specific sub-challenges within these focus areas, or identify datasets relevant to these problems. AI could also draft a 'Code of Ethics' for sustainable tech development or help teams find relevant open-source sustainability APIs.",
   rules: "1. Projects must have a clear positive environmental impact, with quantifiable metrics if possible. \n2. Solutions can be software, hardware, or a combination. \n3. Data-driven approaches and open-source contributions are encouraged. \n\nAI can help define metrics for measuring environmental impact for judging or suggest frameworks for life-cycle assessment of solutions.",
   publicPageContent: {
-    ...DefaultHackathonData.publicPageContent,
     heroTitle: "Code Green: Innovate for Sustainability!",
     heroSubtitle: "Use your tech skills to build a more sustainable future for all. Tackle real-world environmental issues.",
+    aboutSection: "Develop technology solutions that promote environmental sustainability and address climate change. Focus areas: renewable energy, circular economy, smart agriculture, conservation, sustainable transportation.",
     imageUrl: "https://via.placeholder.com/1200x400.png?text=Sustainable+Tech+Challenge",
   },
   submissionQuestions: [
