@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# GCP Service Account (contains secrets)
+gcp-service-account.json
+*.json
+!package.json
+!package-lock.json
+!tsconfig*.json
+!metadata.json
