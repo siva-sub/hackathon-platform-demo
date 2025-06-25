@@ -124,6 +124,37 @@
   }
 }
 </script>
+<script>
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get('p');
+    const q = params.get('q');
+    const h = params.get('h');
+    if (p) {
+      // Reconstruct the path, query, and hash.
+      // p is the path (e.g., /some/page)
+      // q is the original query string (e.g., ?foo=bar)
+      // h is the original hash (e.g., #section)
+      let newPath = p;
+      if (q && q !== 'undefined' && q !== 'null') {
+        newPath += decodeURIComponent(q);
+      }
+      if (h && h !== 'undefined' && h !== 'null') {
+        newPath += decodeURIComponent(h);
+      }
+
+      // Get the repository name if the site is hosted like <username>.github.io/<repo-name>/
+      // This should match the basePath logic in 404.html and vite.config.js
+      const repoName = window.location.pathname.match(/^\/([^\/]+)/);
+      const basePath = repoName ? repoName[0] : ''; // e.g., /Hackathon-Platform-Demo or empty if root
+
+      // Replace the current URL with the correct SPA path.
+      // The basePath part is already part of window.location.pathname
+      // We want to replace the query string part (?p=...) with the actual path.
+      window.history.replaceState(null, '', basePath + newPath);
+    }
+  })();
+</script>
 <link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-neutral-100 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-300">
